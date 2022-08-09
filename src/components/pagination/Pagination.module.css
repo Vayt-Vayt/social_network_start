@@ -1,0 +1,27 @@
+.paginationsContent {
+    display: flex;
+    justify-content: center;
+    font-size: larger;
+    text-align: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+
+}
+
+.paginations {
+    margin: 2px;
+    width: 30px;
+    border: 2px solid grey;
+}
+
+.paginationsActive {
+    margin: 2px;
+    width: 30px;
+    border: 2px solid black;
+    font-size: x-large
+}
+
+.paginationsContent button {
+    width: 50px;
+    font-size: medium;
+}

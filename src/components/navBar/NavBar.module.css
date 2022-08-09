@@ -16,6 +16,10 @@
     color:black;
 }
 
+.link a:hover {
+    color:blue;
+}
+
 .link a.active {
     color:goldenrod;
 }

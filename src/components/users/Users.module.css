@@ -1,0 +1,20 @@
+.elemUser {
+    display: flex;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.namePhoto {
+    display: flex;
+}
+.namePhoto img {
+    width: 130px;
+    border-radius: 35%;
+    margin: 10px;
+}
+
+.elemInfo {
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+}

@@ -6,5 +6,51 @@
 .nameLabel {
     display: flex;
     flex-direction: column;
-    margin: 5px;
+    margin: 25px;
 }
+
+.nameLabel input {
+    width: 300px;
+    padding: 3px;
+    border: 2px solid white;
+    text-align: center;
+    font-size: medium;
+}
+
+.nameLabel input:hover {
+    border: 2px solid blue;
+}
+
+.nameLabel input:focus {
+    border: 2px solid blue;
+}
+
+.errorsActive {
+    text-align: center;
+    color: red;
+    border-bottom: 1px solid red;
+}
+
+.form_button {
+    display: flex;
+    justify-content: center;
+}
+
+.form_button button {
+    border: none;
+    border-radius: 7px;
+    padding: 5px;
+    width: 300px;
+    background-color: blue;
+    color: white;
+    font-size: medium;
+}
+
+.form_button button:disabled {
+    background-color:  coral;
+}
+
+p::before {
+    display: inline;
+    content: "⚠ ";
+  }

@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 const NavBar = () => {
     const clas = navData => navData.isActive ? styless.active : styless.item;
+    
     return (
         <aside className={styless.navBar}>
             <div className={styless.link}>
