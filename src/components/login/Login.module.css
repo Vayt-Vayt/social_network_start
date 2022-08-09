@@ -1,0 +1,10 @@
+.loginMarkup {
+    display: flex;
+    justify-content: center;
+}
+
+.nameLabel {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
