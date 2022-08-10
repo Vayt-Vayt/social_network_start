@@ -2,10 +2,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styless from './Header.module.css'
 import icon from '../../images/logoIcon.png'
+import { useSelector } from 'react-redux';
 
-const Header = () => {
+const Header = ({login}) => {
     const router = useNavigate()
-
     const loginNavigation = () => {
         router('/login')
     }
@@ -16,12 +16,24 @@ const Header = () => {
                 <img alt='logo' src={icon} width={'60px'}/>
             </div>
             <div className={styless.buttons}>
-                <b>names</b>
-                {/* <button>Exit</button> */}
-                <button onClick={loginNavigation}>Login</button>
+                {login && 
+                 <><b>{login}</b>
+                 <button>Exit</button></>
+                }
+                { !login && 
+                    <button onClick={loginNavigation}>Login</button>
+                }
             </div>
         </header>
     );
 };
 
-export default Header;
+
+const HeaderContainer = () => {
+    const {login} = useSelector(state => state.auth)
+    return (
+        <Header login={login}/>
+    )
+}
+
+export default HeaderContainer;

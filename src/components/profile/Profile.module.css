@@ -1,4 +1,36 @@
 .profileContent {
     display: grid;
-    
+    grid-template-areas: 'p i' 'c c';
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
+}
+
+.photosAvatar {
+    grid-area: p;
+}
+
+.photosAvatar img {
+    margin: 10px;
+    width: 350px;
+    border-radius: 10%;
+}
+
+.infoUser {
+    margin: 5px;
+    grid-area: i;
+    display: grid;
+    grid-template-areas: 's' 'w';
+    justify-content: center;
+}
+
+.content {
+    grid-area: c;
+}
+
+.status {
+    grid-area: s;
+}
+
+.informations {
+    grid-area: w;
 }

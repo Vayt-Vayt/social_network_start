@@ -5,28 +5,7 @@ const SET_CURRENT_PAGE = '//USERS_SET_CURRENT_PAGE'
 
 
 const initialState = {
-  users: [
-    // {
-    //   "name": "Shubert",
-    //   "id": 1,
-    //   "photos": {
-    //     "small": null,
-    //     "large": null
-    //   },
-    //   "status": "i'm good ",
-    //   "followed": false
-    // },
-    // {
-    //   "name": "Hacker",
-    //   "id": 2,
-    //   "photos": {
-    //     "small": null,
-    //     "large": null
-    //   },
-    //   "status": null,
-    //   "followed": false
-    // }
-  ],
+  users: [],
   currentPage: 1,
   totalCount: null,
   error: null,

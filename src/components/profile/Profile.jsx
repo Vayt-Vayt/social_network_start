@@ -1,21 +1,41 @@
-import React from 'react';
-import styless from './Profile.module.css'
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styless from "./Profile.module.css";
+import photoAvatar from "../../images/users.jpg";
+import ProfileInfo from "./ProfileInfo";
+import { useEffect } from "react";
+import { getProfileThunk } from "../redux/profileReducer";
+import { useParams } from "react-router-dom";
 
-const Profile = (props) => {
-
-    return (
-        <div className={styless.profileContent}>
-          <div className={styless.photosAvatar}>
-            <img alt='avatar'src={''} />
-          </div>
-          <div className={styless.infoUser}>
-            info
-          </div>
-          <div className={styless.content}>
-            posts
-          </div>  
-        </div>
-    );
+const Profile = ({ profile }) => {
+  const { photos } = profile;
+  const srcAvatar = photos?.large ? photos.large : photoAvatar;
+  return (
+    <div className={styless.profileContent}>
+      <div className={styless.photosAvatar}>
+        <img alt="avatar" src={srcAvatar} />
+      </div>
+      <div className={styless.infoUser}>
+        <ProfileInfo profile={profile} />
+      </div>
+      <div className={styless.content}>posts</div>
+    </div>
+  );
 };
 
-export default Profile;
+const ProfileContainer = (props) => {
+  const { profile, auth } = useSelector((state) => state);
+  const dispatch = useDispatch()
+  let {id} = useParams()
+
+  if (!id) {
+    id = auth.userId
+  }
+  useEffect(() => {
+    dispatch(getProfileThunk(id))
+  }, [id])
+
+  return <Profile profile={profile} />;
+};
+
+export default ProfileContainer;

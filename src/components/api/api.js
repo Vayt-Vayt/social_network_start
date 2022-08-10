@@ -10,3 +10,19 @@ export const userAPI = {
     getUsers: (currentPage=1, pageSize=5) => instance.get(`users?page=${currentPage}&count=${pageSize}`)
     .then(response => response.data)
 }
+
+export const profileAPI = {
+    getProfileId: (userId) => instance.get(`profile/${userId}`)
+        .then(response => response.data),
+    getStatusId: (userId) => instance.get(`profile/status/${userId}`)
+        .then(response => response.data)
+}
+
+export const authAPI = {
+    getAuthMe: () => instance.get(`auth/me`),
+    setAuth: (email, password, rememberMe, captcha) => 
+        instance.post(`auth/login`, {email, password, rememberMe, captcha})
+        .then(response => response.data),
+    getCaptcha: (url) => instance.get(`security/get-captcha-url`),
+    deletAuth: () => instance.delete(`auth/login`).then(response => response.data)
+}

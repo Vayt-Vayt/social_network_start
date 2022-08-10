@@ -1,8 +1,11 @@
 import React from "react";
 import styless from "./Login.module.css";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { onLogin } from "../redux/aythReduser";
+import { Navigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ loginGo, isAuth, userId }) => {
   const {
     register,
     formState: { errors, isValid },
@@ -11,9 +14,13 @@ const Login = () => {
   } = useForm({ mode: "onBlur" });
 
   const onSubmitForm = (data) => {
-    console.log(data);
+    loginGo(data)
     reset();
   };
+
+  if (isAuth) {
+    return <Navigate to={`/profile/${userId}`} />
+  }
 
   return (
     <div className={styless.loginMarkup}>
@@ -71,4 +78,14 @@ const Login = () => {
   );
 };
 
-export default Login;
+
+const LoginContainer = () => {
+  const {isAuth, userId} = useSelector(state => state.auth )
+  const dispatch = useDispatch()
+  const loginGo = (data) => dispatch(onLogin(data))
+  return (
+    <Login loginGo={loginGo} isAuth={isAuth} userId={userId}/>
+  )
+}
+
+export default LoginContainer;
