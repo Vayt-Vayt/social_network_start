@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import userPhoto from "../../images/users.jpg";
 import Pagination from "../pagination/Pagination";
 import { getProfileThunk } from "../redux/profileReducer";
@@ -9,11 +9,11 @@ import { getUserThunk, setCurrentPageAC } from "../redux/userReducer";
 import styless from "./Users.module.css";
 
 const Users = ({ users, onPageCurrent, totalCount, currentPage, profileInfoUser }) => {
-  const route = useNavigate();
-  const onNavigate = (id) => {
-    // profileInfoUser(id)
-    // route(`/profile/${id}`);
-  }
+  // const route = useNavigate();
+  // const onNavigate = (id) => {
+  //   profileInfoUser(id)
+  //   route(`/profile/${id}`);
+  // }
 
   return (
     <div>
@@ -21,7 +21,7 @@ const Users = ({ users, onPageCurrent, totalCount, currentPage, profileInfoUser 
         <div key={user.id} className={styless.elemUser}>
           <div
             className={styless.namePhoto}
-            onClick={() => onNavigate(user.id)}
+            // onClick={() => onNavigate(user.id)}
           >
             <NavLink to={`/profile/${user.id}`}>
             <img
@@ -68,7 +68,8 @@ export const UsersContainer = (props) => {
     if (users.length < 1) {
       dispatch(getUserThunk());
     }
-  }, []);
+  }, [dispatch, users.length]);
+
   return (
     <Users
       users={users}

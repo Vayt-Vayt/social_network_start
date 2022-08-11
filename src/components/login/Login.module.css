@@ -54,3 +54,10 @@ p::before {
     display: inline;
     content: "⚠ ";
   }
+
+
+.nameLabel img {
+ 
+    margin: 5px auto;
+    width: 150px;
+}

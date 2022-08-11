@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { onLogin } from "../redux/aythReduser";
 import { Navigate } from "react-router-dom";
 
-const Login = ({ loginGo, isAuth, userId }) => {
+const Login = ({ loginGo, isAuth, userId, errorsAuth, captchaURL }) => {
   const {
     register,
     formState: { errors, isValid },
@@ -15,9 +15,10 @@ const Login = ({ loginGo, isAuth, userId }) => {
 
   const onSubmitForm = (data) => {
     loginGo(data)
+    console.log(data);
     reset();
   };
-
+console.log(captchaURL);
   if (isAuth) {
     return <Navigate to={`/profile/${userId}`} />
   }
@@ -64,12 +65,22 @@ const Login = ({ loginGo, isAuth, userId }) => {
             )}
           </div>
         </div>
+        {errorsAuth && <p className={styless.errorsActive}>{errorsAuth}</p>}
         <div className={styless.nameLabel}>
           <label>
             <b>Remember Me</b>
           </label>
           <input type={"checkbox"} {...register("rememberMe")} />
         </div>
+        {captchaURL && 
+          <div className={styless.nameLabel}>
+            <img src={captchaURL} alt="captcha" />
+            <input type={"text"}
+              {...register('captcha', {
+                required: "Поле обязательное к заполнению !"
+              })}
+            />
+          </div>}
         <div className={styless.form_button}>
           <button disabled={!isValid}>Login</button>
         </div>
@@ -80,11 +91,17 @@ const Login = ({ loginGo, isAuth, userId }) => {
 
 
 const LoginContainer = () => {
-  const {isAuth, userId} = useSelector(state => state.auth )
+  const { isAuth, userId, errorsAuth, captchaURL } = useSelector(state => state.auth )
   const dispatch = useDispatch()
   const loginGo = (data) => dispatch(onLogin(data))
   return (
-    <Login loginGo={loginGo} isAuth={isAuth} userId={userId}/>
+    <Login 
+      loginGo={loginGo} 
+      isAuth={isAuth} 
+      userId={userId} 
+      errorsAuth={errorsAuth} 
+      captchaURL={captchaURL}
+    />
   )
 }
 

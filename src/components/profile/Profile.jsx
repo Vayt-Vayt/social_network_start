@@ -30,10 +30,16 @@ const ProfileContainer = (props) => {
 
   if (!id) {
     id = auth.userId
+
   }
+  console.log((id));
+  console.log(auth.userId, 'user');
+  console.log(auth, 'auth');
+  console.log(profile, 'prof');
+
   useEffect(() => {
     dispatch(getProfileThunk(id))
-  }, [id])
+  }, [id, auth.userId, dispatch])
 
   return <Profile profile={profile} />;
 };

@@ -52,10 +52,21 @@ const getStatuseAC = (status) => ({
     payload: status
 })
 
+const getStatusThunk = (userId) => async (dispatch) => {
+    const status = await profileAPI.getStatusId(userId)
+    dispatch(getStatuseAC(status))
+}
+
 export const getProfileThunk = (userId) => async (dispatch) => {
     const response = await profileAPI.getProfileId(userId)
-    const status = await profileAPI.getStatusId(userId)
     dispatch(getProfileAC(response))
-    dispatch(getStatuseAC(status))
+    dispatch(getStatusThunk(userId))
+}
+
+export const setStatusProfile = (status) => async (dispatch) => {
+    const response = await profileAPI.setStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(getStatusThunk(status))
+    }
 }
 
