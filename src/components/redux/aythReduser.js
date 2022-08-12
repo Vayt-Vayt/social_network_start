@@ -20,7 +20,7 @@ export const authReducer = (state = initialState, action) => {
         case SET_USER_AUTH:
             return {
                 ...state,
-                isAuth: true,
+                isAuth: action.payload.isAuth,
                 email: action.payload.email,
                 userId: action.payload.id,
                 login: action.payload.login,
@@ -56,13 +56,17 @@ const setErrorAuth = (error) => ({
     payload: error
 })
 
+export const getUserAuth = () => async (dispatch) => {
+    const res = await authAPI.getAuthMe()
+    if (res.data.resultCode === 0) {
+        dispatch(setUserAuth({...res.data.data, isAuth: true}))
+    }
+}
+
 export const onLogin = ({ email, password, rememberMe = false, captcha = null }) => async (dispatch) => {
     const response = await authAPI.setAuth(email, password, rememberMe, captcha)
     if (response.resultCode === 0) {
-        const res = await authAPI.getAuthMe(response.data.userId)
-        if (res.data.resultCode === 0) {
-            dispatch(setUserAuth(res.data.data))
-        }
+        dispatch(getUserAuth())
     } else {
         if (response.resultCode === 10) {
             const captcha = await authAPI.getCaptcha()
@@ -72,5 +76,12 @@ export const onLogin = ({ email, password, rememberMe = false, captcha = null })
             ? response.messages[0]
             : 'Email and Password is wrong'
         dispatch(setErrorAuth(message))
+    }
+}
+
+export const offLogin = () => async (dispatch) => {
+    const response = await authAPI.deletAuth()
+    if (response.resultCode === 0) {
+        dispatch(setUserAuth({ email: null, userId: null, login: null, captchaURL: null, isAuth: false }))
     }
 }

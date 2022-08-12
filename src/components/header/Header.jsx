@@ -2,9 +2,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styless from './Header.module.css'
 import icon from '../../images/logoIcon.png'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { offLogin } from '../redux/aythReduser';
 
-const Header = ({login}) => {
+const Header = ({ login, offLoginUser }) => {
     const router = useNavigate()
     const loginNavigation = () => {
         router('/login')
@@ -18,7 +19,7 @@ const Header = ({login}) => {
             <div className={styless.buttons}>
                 {login && 
                  <><b>{login}</b>
-                 <button>Exit</button></>
+                 <button onClick={offLoginUser}>Exit</button></>
                 }
                 { !login && 
                     <button onClick={loginNavigation}>Login</button>
@@ -31,8 +32,10 @@ const Header = ({login}) => {
 
 const HeaderContainer = () => {
     const {login} = useSelector(state => state.auth)
+    const dispatch = useDispatch()
+    const offLoginUser = () => dispatch(offLogin())
     return (
-        <Header login={login}/>
+        <Header login={login} offLoginUser={offLoginUser} />
     )
 }
 

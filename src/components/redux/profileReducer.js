@@ -57,11 +57,17 @@ const getStatusThunk = (userId) => async (dispatch) => {
     dispatch(getStatuseAC(status))
 }
 
-export const getProfileThunk = (userId) => async (dispatch) => {
+export const getProfileThunk = (userId) =>  async (dispatch) => {
     const response = await profileAPI.getProfileId(userId)
-    dispatch(getProfileAC(response))
     dispatch(getStatusThunk(userId))
+    dispatch(getProfileAC(response))
 }
+
+/* Promise.all([promise1, number, obj])
+  .then(([response1, response2, response3]) => {
+    console.log(response1)
+    // 1
+    console.log(response2) */
 
 export const setStatusProfile = (status) => async (dispatch) => {
     const response = await profileAPI.setStatus(status)

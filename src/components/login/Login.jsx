@@ -18,7 +18,7 @@ const Login = ({ loginGo, isAuth, userId, errorsAuth, captchaURL }) => {
     console.log(data);
     reset();
   };
-console.log(captchaURL);
+  console.log(isAuth, 'log');
   if (isAuth) {
     return <Navigate to={`/profile/${userId}`} />
   }

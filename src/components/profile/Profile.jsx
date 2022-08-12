@@ -27,10 +27,8 @@ const ProfileContainer = (props) => {
   const { profile, auth } = useSelector((state) => state);
   const dispatch = useDispatch()
   let {id} = useParams()
-
   if (!id) {
     id = auth.userId
-
   }
   console.log((id));
   console.log(auth.userId, 'user');
@@ -38,6 +36,7 @@ const ProfileContainer = (props) => {
   console.log(profile, 'prof');
 
   useEffect(() => {
+    if (id)
     dispatch(getProfileThunk(id))
   }, [id, auth.userId, dispatch])
 
