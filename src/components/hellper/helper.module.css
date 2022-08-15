@@ -1,0 +1,16 @@
+
+.errorsActive {
+    text-align: center;
+    color: red;
+    border-bottom: 1px solid red;
+}
+
+.errorsActive p::before {
+    display: inline;
+    content: "⚠ ";
+  }
+
+  .form_filling {
+    display: flex;
+    flex-direction: column;
+}

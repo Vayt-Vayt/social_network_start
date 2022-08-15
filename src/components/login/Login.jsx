@@ -43,7 +43,7 @@ const Login = ({ loginGo, isAuth, userId, errorsAuth, captchaURL }) => {
           />
           <div>
             {errors?.email && (
-              <p className={styless.errorsActive}>{errors?.email.message}</p>
+              <p className={styless.errorsActive}>{errors?.email?.message}</p>
             )}
           </div>
         </div>
@@ -61,7 +61,7 @@ const Login = ({ loginGo, isAuth, userId, errorsAuth, captchaURL }) => {
           />
           <div>
             {errors?.password && (
-              <p className={styless.errorsActive}>{errors?.password.message}</p>
+              <p className={styless.errorsActive}>{errors?.password?.message}</p>
             )}
           </div>
         </div>
@@ -80,6 +80,9 @@ const Login = ({ loginGo, isAuth, userId, errorsAuth, captchaURL }) => {
                 required: "Поле обязательное к заполнению !"
               })}
             />
+            {errors?.captcha && (
+              <p className={styless.errorsActive}>{errors?.captcha?.message}</p>
+            )}
           </div>}
         <div className={styless.form_button}>
           <button disabled={!isValid}>Login</button>

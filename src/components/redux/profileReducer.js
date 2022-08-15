@@ -1,4 +1,5 @@
 import { profileAPI } from "../api/api"
+import { getUserAuth } from "./aythReduser"
 
 const GET_PROFILE_USER = '//PROFILE_GET_PROFILE_USER'
 const GET_STATUS_USER = '//PROFILE_GET_STATUS_USER'
@@ -63,16 +64,18 @@ export const getProfileThunk = (userId) =>  async (dispatch) => {
     dispatch(getProfileAC(response))
 }
 
-/* Promise.all([promise1, number, obj])
-  .then(([response1, response2, response3]) => {
-    console.log(response1)
-    // 1
-    console.log(response2) */
 
-export const setStatusProfile = (status) => async (dispatch) => {
+
+export const setStatusProfile = (status, userId) => async (dispatch) => {
     const response = await profileAPI.setStatus(status)
     if (response.data.resultCode === 0) {
-        dispatch(getStatusThunk(status))
+        dispatch(getStatusThunk(userId))
     }
 }
 
+export const setInfoProfile = (data) => async (dispatch) => {
+    const response = await profileAPI.setInfoProfile(data)
+    if (response.data.resultCode === 0) {
+        dispatch(getUserAuth())
+    }
+}

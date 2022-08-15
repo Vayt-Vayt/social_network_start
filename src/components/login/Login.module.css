@@ -50,7 +50,7 @@
     background-color:  coral;
 }
 
-p::before {
+.errorsActive p::before {
     display: inline;
     content: "⚠ ";
   }

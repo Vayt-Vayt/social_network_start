@@ -1,3 +1,5 @@
+/* profile */
+
 .profileContent {
     display: grid;
     grid-template-areas: 'p i' 'c c';
@@ -31,6 +33,92 @@
     grid-area: s;
 }
 
+/* end profile */
+
+/* profileInfo */
+
 .informations {
     grid-area: w;
 }
+
+
+/* end profileInfo */
+
+
+/* profileInfoEdit */
+
+.name_input {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin: 7px 0;
+}
+
+.name_input input, .name_input textarea {
+    margin:0 5px;
+    padding: 2px;
+    width: 200px;
+    height: auto;
+    background-color: transparent;
+    border: 2px solid  white;
+}
+
+.name_input  input:hover, .name_input  textarea:hover {
+   border: 2px solid blue;
+}
+
+  .name_input  input:focus, .name_input  textarea:focus {
+    outline: none !important;
+    border-color: blue;
+ }
+
+
+.button_edit {
+    display: flex;
+    justify-content: center;
+}
+
+.button_edit button {
+    margin: 10px 0;
+    width: 100px;
+    border: none;
+}
+
+/* end profileInfoEdit */
+
+
+/*  status */
+.form_contant {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.form_button {
+    padding: 3px;
+    margin: 0 10px;
+    width: 410px;
+    border: none;
+}
+
+.form_contant  textarea {
+    width: 400px;
+    text-align: center;
+    color: black;
+    background-color: transparent;
+    padding: 3px;
+    margin: 10px;
+    margin-bottom: 1px ;
+}
+
+.form_input {
+    width: 400px;
+    text-align: center;
+    color: black;
+    background-color: transparent;
+    padding: 3px;
+    margin: 10px;
+    margin-bottom: 1px ;
+}
+
+/* end status */

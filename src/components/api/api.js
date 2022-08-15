@@ -16,7 +16,8 @@ export const profileAPI = {
         .then(response => response.data),
     getStatusId: (userId) => instance.get(`profile/status/${userId}`)
         .then(response => response.data),
-    setStatus: (status) => instance.put(` /profile/status`, {status: status})
+    setStatus: (status) => instance.put(`profile/status`, {status: status}),
+    setInfoProfile: (data) => instance.put(`profile`, {...data})
 }
 
 export const authAPI = {

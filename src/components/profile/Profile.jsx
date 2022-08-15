@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styless from "./Profile.module.css";
 import photoAvatar from "../../images/users.jpg";
 import ProfileInfo from "./ProfileInfo";
 import { useEffect } from "react";
-import { getProfileThunk } from "../redux/profileReducer";
+import { getProfileThunk, setInfoProfile } from "../redux/profileReducer";
 import { useParams } from "react-router-dom";
 
-const Profile = ({ profile }) => {
+const Profile = ({
+  profile,
+  isOwner,
+  setInfoProfile,
+  edit,
+  onEdit,
+  saveEdit,
+  offEdit
+}) => {
   const { photos } = profile;
   const srcAvatar = photos?.large ? photos.large : photoAvatar;
   return (
@@ -16,7 +24,15 @@ const Profile = ({ profile }) => {
         <img alt="avatar" src={srcAvatar} />
       </div>
       <div className={styless.infoUser}>
-        <ProfileInfo profile={profile} />
+        <ProfileInfo
+          profile={profile}
+          isOwner={isOwner}
+          setInfoProfile={setInfoProfile}
+          edit={edit}
+          onEdit={onEdit}
+          saveEdit={saveEdit}
+          offEdit={offEdit}
+        />
       </div>
       <div className={styless.content}>posts</div>
     </div>
@@ -25,22 +41,37 @@ const Profile = ({ profile }) => {
 
 const ProfileContainer = (props) => {
   const { profile, auth } = useSelector((state) => state);
-  const dispatch = useDispatch()
-  let {id} = useParams()
+  const dispatch = useDispatch();
+  const [edit, setEdit] = useState(false);
+ 
+  let { id } = useParams();
   if (!id) {
-    id = auth.userId
+    id = auth.userId;
   }
-  console.log((id));
-  console.log(auth.userId, 'user');
-  console.log(auth, 'auth');
-  console.log(profile, 'prof');
+  const isOwner = id === auth.userId;
+
+  const onEdit = () => (isOwner ? setEdit(true) : null);
+  const offEdit = () => setEdit(false);
+  const saveEdit = (data) => {
+    dispatch(setInfoProfile(data));
+    console.log(data);
+    offEdit();
+  };
 
   useEffect(() => {
-    if (id)
-    dispatch(getProfileThunk(id))
-  }, [id, auth.userId, dispatch])
+    if (id) dispatch(getProfileThunk(id));
+  }, [id, auth.userId, dispatch]);
 
-  return <Profile profile={profile} />;
+  return (
+    <Profile
+      profile={profile}
+      isOwner={isOwner}
+      edit={edit}
+      onEdit={onEdit}
+      saveEdit={saveEdit}
+      offEdit={offEdit}
+    />
+  );
 };
 
 export default ProfileContainer;
