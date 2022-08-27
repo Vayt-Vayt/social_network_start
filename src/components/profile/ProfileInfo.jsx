@@ -1,4 +1,5 @@
 import React from "react";
+import { ContactsInfo } from "./Contacts";
 import styless from "./Profile.module.css";
 import ProfileInfoEdit from "./ProfileInfoEdit";
 import ContainerStatus from "./Status";
@@ -13,6 +14,7 @@ const ProfileInfo = ({ profile, isOwner, offEdit, onEdit, saveEdit, edit }) => {
   } = profile;
 
   const nullValue = (value) => (value ? value : "Value not set");
+  const jobStatus = (vale) => (vale ? "Looking for a job" : "Working")
 
   return (
     <>
@@ -32,22 +34,14 @@ const ProfileInfo = ({ profile, isOwner, offEdit, onEdit, saveEdit, edit }) => {
           <div>
             <b>Looking for a job : </b>
             <label>
-              {nullValue(lookingForAJob) ? "Looking for a job" : "Working"}
+              { jobStatus(nullValue(lookingForAJob)) }
             </label>
           </div>
           <div>
             <b>Looking for a job description : </b>
             <label>{nullValue(lookingForAJobDescription)}</label>
           </div>
-          <div>
-            <b>Contacts : </b>
-            {Object.keys(contacts).map((key) => (
-              <div key={key}>
-                <p>{key}: </p>
-                <span>{contacts[key]}</span>
-              </div>
-            ))}
-          </div>
+          <ContactsInfo contacts={contacts} />
         </div>
       )}
       {edit && (

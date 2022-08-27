@@ -2,7 +2,7 @@ import React from "react";
 import { FormAction } from "../hellper/helper";
 import styless from "./Profile.module.css";
 
-const Contacts = ({ contacts, errors, register }) => {
+const ContactsEdit = ({ contacts, errors, register }) => {
   return (
     <div>
       <b>Contacts : </b>
@@ -25,4 +25,19 @@ const Contacts = ({ contacts, errors, register }) => {
   );
 };
 
-export default Contacts;
+export default ContactsEdit;
+
+export const ContactsInfo = ({ contacts }) => {
+  return (
+    <div>
+      <b>Contacts : </b>
+      {Object.keys(contacts).map((key) => (
+        contacts[key] && 
+        <div key={key}>
+          <p>{key}: </p>
+          <a href={contacts[key]}>{contacts[key]}</a>
+        </div>
+      ))}
+    </div>
+  );
+};

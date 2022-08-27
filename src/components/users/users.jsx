@@ -5,39 +5,42 @@ import { NavLink } from "react-router-dom";
 import userPhoto from "../../images/users.jpg";
 import Pagination from "../pagination/Pagination";
 import { getProfileThunk } from "../redux/profileReducer";
-import { getUserThunk, setCurrentPageAC } from "../redux/userReducer";
+import { getUserThunk, onFollow, setCurrentPageAC, deleteFollow } from "../redux/userReducer";
 import styless from "./Users.module.css";
 
-const Users = ({ users, onPageCurrent, totalCount, currentPage, profileInfoUser }) => {
-  // const route = useNavigate();
-  // const onNavigate = (id) => {
-  //   profileInfoUser(id)
-  //   route(`/profile/${id}`);
-  // }
-
+const Users = ({
+  users,
+  onPageCurrent,
+  totalCount,
+  currentPage,
+  follow,
+  unFollow,
+  disabledFollow
+}) => {
+  
   return (
     <div>
       {users.map((user) => (
         <div key={user.id} className={styless.elemUser}>
-          <div
-            className={styless.namePhoto}
-            // onClick={() => onNavigate(user.id)}
-          >
+          <div className={styless.namePhoto}>
             <NavLink to={`/profile/${user.id}`}>
-            <img
-              alt="avatar"
-              src={user.photos.small ? user.photos.small : userPhoto}
-              // style={{width: '80px', margin:'5px'}}
-            />
+              <img
+                alt="avatar"
+                src={user.photos.small ? user.photos.small : userPhoto}
+              />
             </NavLink>
           </div>
           <div className={styless.elemInfo}>
             <label>{user.name}</label>
             {user.status && <label>{user.status}</label>}
             {user.followed ? (
-              <button>Unfolloed</button>
+              <button onClick={() =>unFollow(user.id)}
+                disabled={ disabledFollow.includes(user.id) }
+              >Unfolloed</button>
             ) : (
-              <button>followed</button>
+              <button onClick={() =>follow(user.id)}
+                disabled={ disabledFollow.includes(user.id) }
+              >followed</button>
             )}
           </div>
         </div>
@@ -54,7 +57,7 @@ const Users = ({ users, onPageCurrent, totalCount, currentPage, profileInfoUser 
 export default Users;
 
 export const UsersContainer = (props) => {
-  const { users, totalCount, currentPage } = useSelector(
+  const { users, totalCount, currentPage, disabledFollow } = useSelector(
     (state) => state.users
   );
   const dispatch = useDispatch();
@@ -62,7 +65,10 @@ export const UsersContainer = (props) => {
     dispatch(setCurrentPageAC(page));
     dispatch(getUserThunk(page));
   };
-  const profileInfoUser = (userId) => dispatch(getProfileThunk(userId))
+  const profileInfoUser = (userId) => dispatch(getProfileThunk(userId));
+  const follow = (userId) => dispatch(onFollow(userId))
+  const unFollow = (userId) => dispatch(deleteFollow(userId))
+  
 
   useEffect(() => {
     if (users.length < 1) {
@@ -77,6 +83,9 @@ export const UsersContainer = (props) => {
       onPageCurrent={onPageCurrent}
       currentPage={currentPage}
       profileInfoUser={profileInfoUser}
+      follow={follow}
+      unFollow={unFollow}
+      disabledFollow={disabledFollow}
     />
   );
 };

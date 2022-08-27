@@ -15,8 +15,9 @@ const Status = ({ status, setStatus, userId, isOwner }) => {
   } = useForm({ mode: "onBlur" });
   const [isEdit, setIsEdit] = useState(false);
   const onEdit = () => isOwner ? setIsEdit(true) : null;
-  const onStatus = (data) => {
-    setStatus(data.status, userId);
+  const onStatus = (status) => {
+    console.log(status);
+    setStatus(status.status, userId);
     setIsEdit(false);
   };
 
@@ -28,9 +29,9 @@ const Status = ({ status, setStatus, userId, isOwner }) => {
           className={styless.form_contant}
         >
           <div>
-            {FormAction("textarea", "text", errors, true, status, {
+            {FormAction("textarea", "text", errors, true, status, "status", {
               register,
-              onBlur: () => handleSubmit(setIsEdit(false)),
+              // onBlur: () => setIsEdit(false),
               maxLength: { value: 100, message: "max length 100 symboll" },
             })}
           </div>

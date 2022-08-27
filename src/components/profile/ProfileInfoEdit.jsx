@@ -3,9 +3,8 @@ import { useForm } from "react-hook-form";
 import { FormAction } from "../hellper/helper";
 import styless from "./Profile.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Contacts from "./Contacts";
 import { schema } from "./shema";
-
+import ContactsEdit from "./Contacts";
 
 const ProfileInfoEdit = ({ profile, offEdit, saveEdit }) => {
   const {
@@ -62,7 +61,7 @@ const ProfileInfoEdit = ({ profile, offEdit, saveEdit }) => {
             { register }
           )}
         </div>
-        <Contacts errors={errors} contacts={contacts} register={register} />
+        <ContactsEdit errors={errors} contacts={contacts} register={register} />
         <div className={styless.button_edit}>
           <button disabled={!isValid} onClick={handleSubmit(saveEdit)}>
             Save

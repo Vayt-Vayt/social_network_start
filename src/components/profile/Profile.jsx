@@ -5,7 +5,7 @@ import photoAvatar from "../../images/users.jpg";
 import ProfileInfo from "./ProfileInfo";
 import { useEffect } from "react";
 import { getProfileThunk, setInfoProfile } from "../redux/profileReducer";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 const Profile = ({
   profile,
@@ -14,10 +14,14 @@ const Profile = ({
   edit,
   onEdit,
   saveEdit,
-  offEdit
+  offEdit,
+  isAuth,
 }) => {
   const { photos } = profile;
   const srcAvatar = photos?.large ? photos.large : photoAvatar;
+  if (!isAuth) {
+    return <Navigate to={`/login`} />;
+  }
   return (
     <div className={styless.profileContent}>
       <div className={styless.photosAvatar}>
@@ -43,7 +47,7 @@ const ProfileContainer = (props) => {
   const { profile, auth } = useSelector((state) => state);
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
- 
+
   let { id } = useParams();
   if (!id) {
     id = auth.userId;
@@ -54,8 +58,7 @@ const ProfileContainer = (props) => {
   const offEdit = () => setEdit(false);
   const saveEdit = (data) => {
     dispatch(setInfoProfile(data));
-    console.log(data);
-    offEdit();
+    dispatch(getProfileThunk(id)).then(() => offEdit());
   };
 
   useEffect(() => {
@@ -70,6 +73,7 @@ const ProfileContainer = (props) => {
       onEdit={onEdit}
       saveEdit={saveEdit}
       offEdit={offEdit}
+      isAuth={auth.isAuth}
     />
   );
 };

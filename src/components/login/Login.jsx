@@ -4,6 +4,9 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { onLogin } from "../redux/aythReduser";
 import { Navigate } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schemaLoginInput } from "./shemaLoginInput";
+import { FormAction } from "../hellper/helper";
 
 const Login = ({ loginGo, isAuth, userId, errorsAuth, captchaURL }) => {
   const {
@@ -11,16 +14,16 @@ const Login = ({ loginGo, isAuth, userId, errorsAuth, captchaURL }) => {
     formState: { errors, isValid },
     handleSubmit,
     reset,
-  } = useForm({ mode: "onBlur" });
+  } = useForm({ mode: "onBlur", resolver: yupResolver(schemaLoginInput) });
 
   const onSubmitForm = (data) => {
-    loginGo(data)
-    console.log(data);
+    loginGo(data);
     reset();
   };
-  console.log(isAuth, 'log');
+  
   if (isAuth) {
-    return <Navigate to={`/profile/${userId}`} />
+    // return <Navigate to={`/profile/${userId}`} />;
+    return <Navigate to={`/`} />;
   }
 
   return (
@@ -33,37 +36,18 @@ const Login = ({ loginGo, isAuth, userId, errorsAuth, captchaURL }) => {
           <label>
             <b>Login</b>
           </label>
-          <input
-            placeholder="Enter email"
-            type={"email"}
-            {...register("email", {
-              required: "Поле обязательное к заполнению !",
-              minLength: { value: 3, message: "min 3 symbol" },
-            })}
-          />
-          <div>
-            {errors?.email && (
-              <p className={styless.errorsActive}>{errors?.email?.message}</p>
-            )}
-          </div>
+          {FormAction("input", "email", errors, true, "", "email", {
+            register,
+          })}
         </div>
         <div className={styless.nameLabel}>
           <label>
             <b>Password</b>
           </label>
-          <input
-            placeholder="Enter password"
-            type={"password"}
-            {...register("password", {
-              required: "Поле обязательное к заполнению !",
-              minLength: { value: 3, message: "min 5 symbol" },
-            })}
-          />
-          <div>
-            {errors?.password && (
-              <p className={styless.errorsActive}>{errors?.password?.message}</p>
-            )}
-          </div>
+          {FormAction("input", "password", errors, false, "", "password", {
+            register,
+            placeholder: "Enter password",
+          })}
         </div>
         {errorsAuth && <p className={styless.errorsActive}>{errorsAuth}</p>}
         <div className={styless.nameLabel}>
@@ -72,18 +56,14 @@ const Login = ({ loginGo, isAuth, userId, errorsAuth, captchaURL }) => {
           </label>
           <input type={"checkbox"} {...register("rememberMe")} />
         </div>
-        {captchaURL && 
+        {captchaURL && (
           <div className={styless.nameLabel}>
             <img src={captchaURL} alt="captcha" />
-            <input type={"text"}
-              {...register('captcha', {
-                required: "Поле обязательное к заполнению !"
-              })}
-            />
-            {errors?.captcha && (
-              <p className={styless.errorsActive}>{errors?.captcha?.message}</p>
-            )}
-          </div>}
+            {FormAction("input", "text", errors, false, null, "captcha", {
+              register,
+            })}
+          </div>
+        )}
         <div className={styless.form_button}>
           <button disabled={!isValid}>Login</button>
         </div>
@@ -92,20 +72,21 @@ const Login = ({ loginGo, isAuth, userId, errorsAuth, captchaURL }) => {
   );
 };
 
-
 const LoginContainer = () => {
-  const { isAuth, userId, errorsAuth, captchaURL } = useSelector(state => state.auth )
-  const dispatch = useDispatch()
-  const loginGo = (data) => dispatch(onLogin(data))
+  const { isAuth, userId, errorsAuth, captchaURL } = useSelector(
+    (state) => state.auth
+  );
+  const dispatch = useDispatch();
+  const loginGo = (data) => dispatch(onLogin(data));
   return (
-    <Login 
-      loginGo={loginGo} 
-      isAuth={isAuth} 
-      userId={userId} 
-      errorsAuth={errorsAuth} 
+    <Login
+      loginGo={loginGo}
+      isAuth={isAuth}
+      userId={userId}
+      errorsAuth={errorsAuth}
       captchaURL={captchaURL}
     />
-  )
-}
+  );
+};
 
 export default LoginContainer;

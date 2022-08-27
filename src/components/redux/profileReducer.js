@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux"
 import { profileAPI } from "../api/api"
 import { getUserAuth } from "./aythReduser"
 
@@ -27,7 +28,6 @@ const initialState = {
 export const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_PROFILE_USER:
-    console.log(action.payload);
             return {
                 ...state,
                 ...action.payload
@@ -59,6 +59,10 @@ const getStatusThunk = (userId) => async (dispatch) => {
 }
 
 export const getProfileThunk = (userId) =>  async (dispatch) => {
+    if (!userId) {
+        debugger
+        userId = useSelector(state=>state.users.userId)
+    }
     const response = await profileAPI.getProfileId(userId)
     dispatch(getStatusThunk(userId))
     dispatch(getProfileAC(response))
