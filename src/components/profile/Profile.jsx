@@ -4,8 +4,13 @@ import styless from "./Profile.module.css";
 import photoAvatar from "../../images/users.jpg";
 import ProfileInfo from "./ProfileInfo";
 import { useEffect } from "react";
-import { getProfileThunk, setInfoProfile } from "../redux/profileReducer";
+import {
+  getProfileThunk,
+  setInfoProfile,
+  setPhotoProfile,
+} from "../redux/profileReducer";
 import { Navigate, useParams } from "react-router-dom";
+import MyModal from "../modal/MyModal";
 
 const Profile = ({
   profile,
@@ -16,17 +21,41 @@ const Profile = ({
   saveEdit,
   offEdit,
   isAuth,
+  onPhoto,
 }) => {
+  const [modal, setModal] = useState(false);
   const { photos } = profile;
   const srcAvatar = photos?.large ? photos.large : photoAvatar;
+  const setPhoto = (e) => {
+    if (e.target.files.length) {
+      onPhoto(e.target.files[0]);
+    }
+  };
+
   if (!isAuth) {
     return <Navigate to={`/login`} />;
   }
   return (
     <div className={styless.profileContent}>
       <div className={styless.photosAvatar}>
-        <img alt="avatar" src={srcAvatar} />
+        <img onClick={() => setModal(true)} alt="avatar" src={srcAvatar} />
+        {isOwner && (
+          <div>
+            <label htmlFor="photo" className={styless.names}>
+              Loading Avatar
+            </label>
+            <input
+              className={styless.nulls}
+              type="file"
+              onChange={setPhoto}
+              id="photo"
+            />
+          </div>
+        )}
       </div>
+      <MyModal state={modal} setState={setModal}>
+        <img className={styless.modalImg} alt="avatar" src={srcAvatar} />
+      </MyModal>
       <div className={styless.infoUser}>
         <ProfileInfo
           profile={profile}
@@ -60,6 +89,7 @@ const ProfileContainer = (props) => {
     dispatch(setInfoProfile(data));
     dispatch(getProfileThunk(id)).then(() => offEdit());
   };
+  const onPhoto = (data) => dispatch(setPhotoProfile(data));
 
   useEffect(() => {
     if (id) dispatch(getProfileThunk(id));
@@ -67,6 +97,7 @@ const ProfileContainer = (props) => {
 
   return (
     <Profile
+      onPhoto={onPhoto}
       profile={profile}
       isOwner={isOwner}
       edit={edit}

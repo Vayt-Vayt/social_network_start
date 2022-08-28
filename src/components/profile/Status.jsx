@@ -7,16 +7,15 @@ import { setStatusProfile } from "../redux/profileReducer";
 import { FormAction } from "../hellper/helper";
 
 const Status = ({ status, setStatus, userId, isOwner }) => {
-  const valueZero = isOwner ? "Add status" : 'Status not set'
+  const valueZero = isOwner ? "Add status" : "Status not set";
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm({ mode: "onBlur" });
   const [isEdit, setIsEdit] = useState(false);
-  const onEdit = () => isOwner ? setIsEdit(true) : null;
+  const onEdit = () => (isOwner ? setIsEdit(true) : null);
   const onStatus = (status) => {
-    console.log(status);
     setStatus(status.status, userId);
     setIsEdit(false);
   };
@@ -31,7 +30,6 @@ const Status = ({ status, setStatus, userId, isOwner }) => {
           <div>
             {FormAction("textarea", "text", errors, true, status, "status", {
               register,
-              // onBlur: () => setIsEdit(false),
               maxLength: { value: 100, message: "max length 100 symboll" },
             })}
           </div>
@@ -39,10 +37,16 @@ const Status = ({ status, setStatus, userId, isOwner }) => {
             <button type={"submit"} className={styless.form_button}>
               Save
             </button>
+            <button
+              onClick={() => setIsEdit(false)}
+              className={styless.form_button}
+            >
+              cancelation
+            </button>
           </div>
         </form>
       )}
-      {!isEdit && <h3 onDoubleClick={onEdit}>{ status || valueZero }</h3>}
+      {!isEdit && <h3 onDoubleClick={onEdit}>{status || valueZero}</h3>}
     </div>
   );
 };
@@ -57,7 +61,14 @@ const ContainerStatus = ({ isOwner }) => {
     [dispatch]
   );
 
-  return <Status status={status} userId={userId} setStatus={setStatus} isOwner={isOwner} />;
+  return (
+    <Status
+      status={status}
+      userId={userId}
+      setStatus={setStatus}
+      isOwner={isOwner}
+    />
+  );
 };
 
 export default ContainerStatus;

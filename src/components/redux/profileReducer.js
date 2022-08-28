@@ -4,6 +4,7 @@ import { getUserAuth } from "./aythReduser"
 
 const GET_PROFILE_USER = '//PROFILE_GET_PROFILE_USER'
 const GET_STATUS_USER = '//PROFILE_GET_STATUS_USER'
+const SET_PHOTOS_USER = '//PROFILE_SET_PHOTOS_USER'
 
 const initialState = {
     userId: null,
@@ -32,10 +33,15 @@ export const profileReducer = (state = initialState, action) => {
                 ...state,
                 ...action.payload
             }
-        case GET_STATUS_USER: 
+        case GET_STATUS_USER:
             return {
                 ...state,
                 status: action.payload
+            }
+        case SET_PHOTOS_USER:
+            return {
+                ...state,
+                photos: action.payload
             }
         default:
             return state
@@ -53,15 +59,20 @@ const getStatuseAC = (status) => ({
     payload: status
 })
 
+const setPhotos = (photo) => ({
+    type: SET_PHOTOS_USER,
+    payload: photo
+})
+
 const getStatusThunk = (userId) => async (dispatch) => {
     const status = await profileAPI.getStatusId(userId)
     dispatch(getStatuseAC(status))
 }
 
-export const getProfileThunk = (userId) =>  async (dispatch) => {
+export const getProfileThunk = (userId) => async (dispatch) => {
     if (!userId) {
         debugger
-        userId = useSelector(state=>state.users.userId)
+        userId = useSelector(state => state.users.userId)
     }
     const response = await profileAPI.getProfileId(userId)
     dispatch(getStatusThunk(userId))
@@ -81,5 +92,12 @@ export const setInfoProfile = (data) => async (dispatch) => {
     const response = await profileAPI.setInfoProfile(data)
     if (response.data.resultCode === 0) {
         dispatch(getUserAuth())
+    }
+}
+
+export const setPhotoProfile = (photo) => async (dispatch) => {
+    const response = await profileAPI.setPhotosProfile(photo)
+    if (response.data.resultCode === 0) {
+        dispatch(setPhotos(response.data.data.photos))
     }
 }
