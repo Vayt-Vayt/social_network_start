@@ -1,0 +1,16 @@
+.myButton {
+    border-radius: 4px;
+    margin: 5px 0;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    transition: all 0.18s ease-in-out;
+    border: 1px solid white;
+    color:white;
+    background-color: transparent;
+    padding: 2px;
+}
+
+.myButton:hover {
+    background-color: blue;
+}

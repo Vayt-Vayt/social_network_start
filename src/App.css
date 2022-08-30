@@ -1,17 +1,16 @@
 * {
     padding: 0px;
 	margin: 0px;
-    /* box-sizing: border-box; */
+    box-sizing: border-box;
 }
 
 .App {
     margin: 0 auto;
     width: 1200px;
-    height: 720px;
+    height: auto;
     display: grid;
     grid-template-areas: 'h h'  'n c' 'n c';
-    grid-template-rows: 60px 1fr;
+    grid-template-rows: 70px 1fr;
     grid-template-columns: 2fr 10fr;
-
 }
 

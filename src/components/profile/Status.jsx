@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import styless from "./Profile.module.css";
 import { setStatusProfile } from "../redux/profileReducer";
-import { FormAction } from "../hellper/helper";
+import { FormActionss } from "../hellper/helper";
+import MyButton from "../ui/button/MyButton";
 
 const Status = ({ status, setStatus, userId, isOwner }) => {
   const valueZero = isOwner ? "Add status" : "Status not set";
@@ -28,21 +29,21 @@ const Status = ({ status, setStatus, userId, isOwner }) => {
           className={styless.form_contant}
         >
           <div>
-            {FormAction("textarea", "text", errors, true, status, "status", {
-              register,
-              maxLength: { value: 100, message: "max length 100 symboll" },
-            })}
+            {FormActionss(
+              "textarea",
+              errors,
+              status,
+              "status",
+              {
+                register,
+                maxLength: { value: 100, message: "max length 100 symboll" },
+              },
+              { autoFocus: true }
+            )}
           </div>
-          <div>
-            <button type={"submit"} className={styless.form_button}>
-              Save
-            </button>
-            <button
-              onClick={() => setIsEdit(false)}
-              className={styless.form_button}
-            >
-              cancelation
-            </button>
+          <div className={styless.form_button}>
+            <MyButton type={"submit"}>Save</MyButton>
+            <MyButton onClick={() => setIsEdit(false)}>cancelation</MyButton>
           </div>
         </form>
       )}

@@ -10,8 +10,13 @@
 
 .paginations {
     margin: 2px;
-    width: 30px;
+    min-width: 30px;
+    width: auto;
     border: 2px solid grey;
+}
+
+.paginations:hover {
+    border: 2px solid black;
 }
 
 .paginationsActive {

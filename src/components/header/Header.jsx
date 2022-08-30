@@ -4,25 +4,27 @@ import styless from './Header.module.css'
 import icon from '../../images/logoIcon.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { offLogin } from '../redux/aythReduser';
+import MyButton from '../ui/button/MyButton';
 
 const Header = ({ login, offLoginUser }) => {
     const router = useNavigate()
-    const loginNavigation = () => {
-        router('/login')
-    }
+    const loginNavigation = () => router(`/login`)
+    const profileNavigation = login ? () => router(`/`) : null
 
     return (
         <header className={styless.content}>
-            <div>
-                <img alt='logo' src={icon} width={'60px'}/>
+            <div className={styless.icons}>
+                <img alt='logo' src={icon} onClick={profileNavigation}/>
             </div>
             <div className={styless.buttons}>
                 {login && 
-                 <><b>{login}</b>
-                 <button onClick={offLoginUser}>Exit</button></>
+                 <>
+                    <b>{login}</b>
+                    <MyButton onClick={offLoginUser}>Exit</MyButton>
+                 </>
                 }
                 { !login && 
-                    <button onClick={loginNavigation}>Login</button>
+                    <MyButton onClick={loginNavigation}>Login</MyButton>
                 }
             </div>
         </header>

@@ -1,4 +1,3 @@
-import React from "react"
 import styless from './helper.module.css'
 
 export const FormAction = (inputForm, type, errors, autoFocus, value, val, { register, ...props }, keys = null) => {
@@ -34,6 +33,29 @@ export const ErrorForm = ({ errors, value, keys }) => {
             : errors?.[value] && (
                 <p className={styless.errorsActive} >{errors?.[value]?.message}</p>
             )}
+        </div>
+    )
+}
+
+export const FormActionss = (inputForm, errors,  value, val, { register, ...props },{...prop}, keys = null ) => {
+    const valueKey = keys !== null ? (`${val}.${keys}`) : val
+        return (
+        <div className={styless.form_filling}>
+            {(inputForm === 'textarea')
+                ? <textarea  {...prop}
+                    {...register(valueKey, {
+                        value: value,
+                        ...props
+                    })}
+                />
+                : <input {...prop}
+                    {...register(valueKey, {
+                        value: value,
+                        ...props
+                    })}
+                />
+            }
+            <ErrorForm errors={errors} value={val} keys={keys} />
         </div>
     )
 }

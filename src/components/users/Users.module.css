@@ -1,7 +1,29 @@
-.elemUser {
+.divElement {
+    background-color: rgba(0, 0, 0, 0.95);
+    border-radius: 10px;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    min-width: 100%;
+    min-height: 600px;
+}
+
+.elemUser {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-around;
     margin-bottom: 10px;
     padding: 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    width: 70%;
+    cursor: pointer;
+}
+
+.elemUser:hover {
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .namePhoto {
@@ -17,5 +39,11 @@
 .elemInfo {
     margin: 5px;
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
+}
+
+.elemInfo button {
+    width: 100px;
 }

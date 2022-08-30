@@ -1,10 +1,18 @@
 .navBar {
+    /* position: fixed; */
+    margin: 0;
     display: flex;
     align-items: center;
     flex-direction: column;
     padding: 5px 0;
     grid-area: n;
-    background-color: rgba(0, 247, 255, 0.596);
+    background-color: rgba(0, 0, 0, 0.95);
+    border-radius: 20px;
+    min-height: 600px;
+    /* ?????? */
+    /* max-height: 600px;
+    width: 100%; */
+
 }
 
 .link {
@@ -13,7 +21,7 @@
 
 .link a {
     text-decoration: none;
-    color:black;
+    color:white;
 }
 
 .link a:hover {

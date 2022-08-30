@@ -19,8 +19,44 @@
     align-items: center;
 }
 
-.buttons {
-    position: fixed;
-    right: 5%;
-    top: 5%;
+.position {
+    position: absolute;
+    right: 52px;
+    top: 32px;
+    width: auto;
+}
+
+.close {
+    position: absolute;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    opacity: 0.5;
+}
+
+.close:hover {
+    opacity: 1;
+}
+
+.close:before, .close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: rgb(255, 255, 255);
+}
+
+.close:before {
+    transform: rotate(45deg);
+}
+
+.close:after {
+    transform: rotate(-45deg);
+}
+
+.modalImg {
+    min-width: 500px;
+    max-width: 1100px;
+    border-radius: 30px;
 }

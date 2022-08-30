@@ -5,6 +5,7 @@ import styless from "./Profile.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./shema";
 import ContactsEdit from "./Contacts";
+import MyButton from "../ui/button/MyButton";
 
 const ProfileInfoEdit = ({ profile, offEdit, saveEdit }) => {
   const {
@@ -63,10 +64,10 @@ const ProfileInfoEdit = ({ profile, offEdit, saveEdit }) => {
         </div>
         <ContactsEdit errors={errors} contacts={contacts} register={register} />
         <div className={styless.button_edit}>
-          <button disabled={!isValid} onClick={handleSubmit(saveEdit)}>
+          <MyButton disabled={!isValid} onClick={handleSubmit(saveEdit)}>
             Save
-          </button>
-          <button onClick={offEdit}>Сancellation</button>
+          </MyButton>
+          <MyButton onClick={offEdit}>Сancellation</MyButton>
         </div>
       </div>
     </>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import MyButton from "../ui/button/MyButton";
 import styless from "./Pagination.module.css";
 
 const Pagination = ({
@@ -20,9 +21,9 @@ const Pagination = ({
   return (
     <div className={styless.paginationsContent}>
       {portionNumber > 1 && (
-        <button onClick={() => setPortionNumber(portionNumber - 1)}>
+        <MyButton onClick={() => setPortionNumber(portionNumber - 1)}>
           Prev
-        </button>
+        </MyButton>
       )}
       {pages
         .filter((page) => page >= leftPortion && page <= rightPortion)
@@ -44,13 +45,13 @@ const Pagination = ({
           );
         })}
       {portionCount > portionNumber && (
-        <button
+        <MyButton
           onClick={() => {
             setPortionNumber(portionNumber + 1);
           }}
         >
           Next
-        </button>
+        </MyButton>
       )}
     </div>
   );

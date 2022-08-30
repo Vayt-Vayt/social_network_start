@@ -3,20 +3,24 @@
 .profileContent {
     display: grid;
     grid-template-areas: 'p i' 'c c';
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr auto;
+    grid-template-columns: 1.2fr 3fr;
+    margin: 0;    
 }
 
 .photosAvatar {
+    margin: 0;
     grid-area: p;
     display: flex;
     align-items: center;
     flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.95);
+    border-radius: 10px;
 }
 
-.photosAvatar img {
+.photoAvatar {
     margin: 10px;
-    width: 350px;
+    width: 300px;
     border-radius: 10%;
     cursor: pointer;
 }
@@ -28,19 +32,20 @@
 }
 
 .names {
-    width: 150px;
-    height: 20px;
     border-radius: 4px;
+    margin: 5px 0;
+    padding: 2px;
     text-align: center;
     cursor: pointer;
     display: block;
     transition: all 0.18s ease-in-out;
-    border: 1px solid #333;
-    color: #333;
+    border: 1px solid white;
+    color:white;
+    background-color: transparent;
 }
 
 .names:hover {
-    color: blue;
+    background-color: blue;
 }
 
 .nulls {
@@ -53,11 +58,14 @@
 }
 
 .infoUser {
-    margin: 5px;
+    margin:0 5px ;
     grid-area: i;
     display: grid;
     grid-template-areas: 's' 'w';
+    grid-template-rows: 1fr 4fr;
     justify-content: center;
+    background-color: rgba(0, 0, 0, 0.95);
+    border-radius: 10px;
 }
 
 .content {
@@ -66,6 +74,8 @@
 
 .status {
     grid-area: s;
+    margin-top: 5px;
+    color: white;
 }
 
 /* end profile */
@@ -74,6 +84,8 @@
 
 .informations {
     grid-area: w;
+    width: auto;
+    color: white;
 }
 
 
@@ -94,6 +106,7 @@ margin: 7px 0;
     padding: 2px;
     width: 200px;
     height: auto;
+    color: white;
     background-color: transparent;
     border: 2px solid  white;
 }
@@ -111,13 +124,27 @@ margin: 7px 0;
 .button_edit {
     display: flex;
     justify-content: center;
+    margin: 5px;
 }
 
 .button_edit button {
-    margin: 10px 0;
-    width: 100px;
+    width: 200px;
     border: none;
 }
+
+.contactsInfo {
+    margin-left: 25px;
+}
+
+.contactsInfo  a {
+    text-decoration: none;
+    color:white;
+}
+
+.contactsInfo a:hover {
+    color:blue;
+}
+
 
 /* end profileInfoEdit */
 
@@ -130,17 +157,22 @@ margin: 7px 0;
 }
 
 .form_button {
-    padding: 3px;
-    margin: 0;
-    width: 215px;
+    display: flex;
+    justify-content: center;
+}
+
+.form_button button {
+    width: 200px;
     border: none;
 }
 
 .form_contant  textarea {
     width: 400px;
     text-align: center;
-    color: black;
+    color: white;
     background-color: transparent;
+    border: none;
+    outline:none;
     padding: 3px;
     margin: 10px;
     margin-bottom: 1px ;

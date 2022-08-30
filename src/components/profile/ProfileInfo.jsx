@@ -14,14 +14,22 @@ const ProfileInfo = ({ profile, isOwner, offEdit, onEdit, saveEdit, edit }) => {
   } = profile;
 
   const nullValue = (value) => (value ? value : "Value not set");
-  const jobStatus = (vale) => (vale ? "Looking for a job" : "Working")
+  const jobStatus = (vale) => (vale ? "Looking for a job" : "Working");
 
   return (
     <>
       <div className={styless.status}>
         <ContainerStatus isOwner={isOwner} />
       </div>
-      {!edit && (
+      {edit ? (
+        <div className={styless.informations}>
+          <ProfileInfoEdit
+            profile={profile}
+            offEdit={offEdit}
+            saveEdit={saveEdit}
+          />
+        </div>
+      ) : (
         <div className={styless.informations} onDoubleClick={onEdit}>
           <div>
             <b>Full name : </b>
@@ -33,9 +41,7 @@ const ProfileInfo = ({ profile, isOwner, offEdit, onEdit, saveEdit, edit }) => {
           </div>
           <div>
             <b>Looking for a job : </b>
-            <label>
-              { jobStatus(nullValue(lookingForAJob)) }
-            </label>
+            <label>{jobStatus(nullValue(lookingForAJob))}</label>
           </div>
           <div>
             <b>Looking for a job description : </b>
@@ -43,13 +49,6 @@ const ProfileInfo = ({ profile, isOwner, offEdit, onEdit, saveEdit, edit }) => {
           </div>
           <ContactsInfo contacts={contacts} />
         </div>
-      )}
-      {edit && (
-        <ProfileInfoEdit
-          profile={profile}
-          offEdit={offEdit}
-          saveEdit={saveEdit}
-        />
       )}
     </>
   );

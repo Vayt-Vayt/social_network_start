@@ -1,0 +1,91 @@
+.content {
+    margin-top: 5px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.95);
+    border-radius: 10px;
+    min-height: 250px;
+}
+
+.formContent {
+    background-color: rgba(0, 0,0, 0.4);
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px;
+    /* border: 2px solid blue; */
+    border-radius: 20px;
+    width: 90%;
+}
+
+.formContent:hover {
+    background-color: rgba(0, 0,0, 0.7);
+}
+
+.formContent textarea {
+    border: none;
+    outline:none;
+    width: 600px;
+    color: blue;
+    background-color: transparent;
+    font-size: x-large;
+}
+
+.postContent {
+    display: grid;
+    grid-template-areas: 'a' 'c';
+    grid-template-rows: 1fr auto ;
+    margin: 15px 0;
+    background-color: rgba(0, 0,0, 0.4);
+    border-radius: 20px;
+    width: 60%;
+    padding: 15px;
+    color: white;
+    font-size: x-large;
+}
+
+.postContent:hover {
+    background-color: rgba(0, 0,0, 0.7);
+}
+
+.buttonsForm {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    margin: 5px;
+}
+
+.avatar {
+    grid-area: a;
+    display: flex;
+    justify-content:space-between;
+    align-content: flex-start;
+}
+
+.position {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.avatar img {
+    width: 50px;
+    border-radius: 50%;
+}
+
+.bodyContent {
+    grid-area: c;
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+}
+
+.modalImg {
+    width: 100%;
+    height: 100%;
+    border-radius: 5%;  
+    cursor: pointer; 
+}
+

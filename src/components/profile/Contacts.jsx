@@ -33,9 +33,8 @@ export const ContactsInfo = ({ contacts }) => {
       <b>Contacts : </b>
       {Object.keys(contacts).map((key) => (
         contacts[key] && 
-        <div key={key}>
-          <p>{key}: </p>
-          <a href={contacts[key]}>{contacts[key]}</a>
+        <div key={key} className={styless.contactsInfo}>
+          <p>{key}: <a href={contacts[key]}>{contacts[key]}</a></p>
         </div>
       ))}
     </div>

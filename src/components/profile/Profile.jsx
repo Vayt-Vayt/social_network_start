@@ -5,12 +5,15 @@ import photoAvatar from "../../images/users.jpg";
 import ProfileInfo from "./ProfileInfo";
 import { useEffect } from "react";
 import {
+  deletePosts,
   getProfileThunk,
   setInfoProfile,
   setPhotoProfile,
+  setPosts,
 } from "../redux/profileReducer";
 import { Navigate, useParams } from "react-router-dom";
-import MyModal from "../modal/MyModal";
+import { PhotoModal } from "../modal/MyModal";
+import Posts from "./Posts";
 
 const Profile = ({
   profile,
@@ -22,6 +25,8 @@ const Profile = ({
   offEdit,
   isAuth,
   onPhoto,
+  addPosts,
+  deletePost
 }) => {
   const [modal, setModal] = useState(false);
   const { photos } = profile;
@@ -35,10 +40,16 @@ const Profile = ({
   if (!isAuth) {
     return <Navigate to={`/login`} />;
   }
+
   return (
     <div className={styless.profileContent}>
       <div className={styless.photosAvatar}>
-        <img onClick={() => setModal(true)} alt="avatar" src={srcAvatar} />
+        <img
+          onClick={() => setModal(true)}
+          alt="avatar"
+          src={srcAvatar}
+          className={styless.photoAvatar}
+        />
         {isOwner && (
           <div>
             <label htmlFor="photo" className={styless.names}>
@@ -52,10 +63,9 @@ const Profile = ({
             />
           </div>
         )}
+        <PhotoModal state={modal} setState={setModal} photo={srcAvatar} />
       </div>
-      <MyModal state={modal} setState={setModal}>
-        <img className={styless.modalImg} alt="avatar" src={srcAvatar} />
-      </MyModal>
+
       <div className={styless.infoUser}>
         <ProfileInfo
           profile={profile}
@@ -67,7 +77,17 @@ const Profile = ({
           offEdit={offEdit}
         />
       </div>
-      <div className={styless.content}>posts</div>
+
+      <div className={styless.content}>
+        <Posts
+          isOwner={isOwner}
+          srcAvatar={srcAvatar}
+          buttonStyles={styless}
+          profile={profile}
+          addPosts={addPosts}
+          deletePost={deletePost}
+        />
+      </div>
     </div>
   );
 };
@@ -90,6 +110,11 @@ const ProfileContainer = (props) => {
     dispatch(getProfileThunk(id)).then(() => offEdit());
   };
   const onPhoto = (data) => dispatch(setPhotoProfile(data));
+  const addPosts = (body, image) => dispatch(setPosts(body, image));
+  const deletePost = (id) => {
+    console.log(id, 'delete');
+    dispatch(deletePosts(id))
+  }
 
   useEffect(() => {
     if (id) dispatch(getProfileThunk(id));
@@ -105,6 +130,8 @@ const ProfileContainer = (props) => {
       saveEdit={saveEdit}
       offEdit={offEdit}
       isAuth={auth.isAuth}
+      addPosts={addPosts}
+      deletePost={deletePost}
     />
   );
 };

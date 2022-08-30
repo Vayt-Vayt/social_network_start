@@ -1,11 +1,11 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import userPhoto from "../../images/users.jpg";
 import Pagination from "../pagination/Pagination";
+import Loader from "../PreLoader/Loader";
 import { getProfileThunk } from "../redux/profileReducer";
 import { getUserThunk, onFollow, setCurrentPageAC, deleteFollow } from "../redux/userReducer";
+import User from "./User";
 import styless from "./Users.module.css";
 
 const Users = ({
@@ -17,33 +17,17 @@ const Users = ({
   unFollow,
   disabledFollow
 }) => {
-  
+ 
   return (
-    <div>
+    <div className={styless.divElement}>
+      { users.length === 0 && <Loader /> }
       {users.map((user) => (
-        <div key={user.id} className={styless.elemUser}>
-          <div className={styless.namePhoto}>
-            <NavLink to={`/profile/${user.id}`}>
-              <img
-                alt="avatar"
-                src={user.photos.small ? user.photos.small : userPhoto}
-              />
-            </NavLink>
-          </div>
-          <div className={styless.elemInfo}>
-            <label>{user.name}</label>
-            {user.status && <label>{user.status}</label>}
-            {user.followed ? (
-              <button onClick={() =>unFollow(user.id)}
-                disabled={ disabledFollow.includes(user.id) }
-              >Unfolloed</button>
-            ) : (
-              <button onClick={() =>follow(user.id)}
-                disabled={ disabledFollow.includes(user.id) }
-              >followed</button>
-            )}
-          </div>
-        </div>
+        <User key={user.id} 
+        disabledFollow={disabledFollow} 
+        follow={follow}
+        unFollow={unFollow}
+        user={user}  
+      />
       ))}
       <Pagination
         currentPage={currentPage}
