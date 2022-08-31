@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Vayt-Vayt/social_network_start/static/css/main.acdf2fd0.css",
+    "main.js": "/Vayt-Vayt/social_network_start/static/js/main.a7b5ad25.js",
+    "static/media/users.jpg": "/Vayt-Vayt/social_network_start/static/media/users.4296b1c549d91e2489a9.jpg",
+    "index.html": "/Vayt-Vayt/social_network_start/index.html",
+    "main.acdf2fd0.css.map": "/Vayt-Vayt/social_network_start/static/css/main.acdf2fd0.css.map",
+    "main.a7b5ad25.js.map": "/Vayt-Vayt/social_network_start/static/js/main.a7b5ad25.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.acdf2fd0.css",
+    "static/js/main.a7b5ad25.js"
+  ]
+}
