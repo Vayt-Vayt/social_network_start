@@ -112,7 +112,6 @@ const ProfileContainer = (props) => {
   const onPhoto = (data) => dispatch(setPhotoProfile(data));
   const addPosts = (body, image) => dispatch(setPosts(body, image));
   const deletePost = (id) => {
-    console.log(id, 'delete');
     dispatch(deletePosts(id))
   }
 
