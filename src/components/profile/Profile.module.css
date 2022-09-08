@@ -31,13 +31,20 @@
  border-radius: 5%;   
 }
 
+.optionsBth {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 2px;
+    margin: 5px 0;
+}
+
 .names {
     border-radius: 4px;
-    margin: 5px 0;
-    padding: 2px;
+    font-size: small;
     text-align: center;
     cursor: pointer;
-    display: block;
+    padding: 2px;
     transition: all 0.18s ease-in-out;
     border: 1px solid white;
     color:white;
@@ -76,6 +83,7 @@
     grid-area: s;
     margin-top: 5px;
     color: white;
+    cursor: pointer;
 }
 
 /* end profile */
@@ -176,6 +184,7 @@ margin: 7px 0;
     padding: 3px;
     margin: 10px;
     margin-bottom: 1px ;
+    resize: none;
 }
 
 .form_input {

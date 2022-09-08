@@ -2,7 +2,7 @@
   "name": "social_network",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/Vayt-Vayt/social_network_start",
+  "homepage": "https://vayt-vayt.github.io/social_network_start",
   "dependencies": {
     "@hookform/resolvers": "^2.9.7",
     "@testing-library/jest-dom": "^5.16.5",

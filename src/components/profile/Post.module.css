@@ -16,7 +16,6 @@
     justify-content: space-around;
     align-items: center;
     padding: 15px;
-    /* border: 2px solid blue; */
     border-radius: 20px;
     width: 90%;
 }
@@ -32,6 +31,7 @@
     color: blue;
     background-color: transparent;
     font-size: x-large;
+    resize: none;
 }
 
 .postContent {

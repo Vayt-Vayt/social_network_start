@@ -14,6 +14,7 @@ import {
 import { Navigate, useParams } from "react-router-dom";
 import { PhotoModal } from "../modal/MyModal";
 import Posts from "./Posts";
+import MyButton from "../ui/button/MyButton";
 
 const Profile = ({
   profile,
@@ -51,7 +52,8 @@ const Profile = ({
           className={styless.photoAvatar}
         />
         {isOwner && (
-          <div>
+          <div className={styless.optionsBth}>
+            <MyButton  onClick={onEdit} >Edit profile</MyButton>
             <label htmlFor="photo" className={styless.names}>
               Loading Avatar
             </label>
