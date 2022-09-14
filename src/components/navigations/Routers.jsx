@@ -14,6 +14,7 @@ const Routers = () => {
         </Route>
         <Route path="/users" element={<UsersContainer />} />
         <Route path="/login" element={<Login />} />
+        <Route path="*" element={<ProfileContainer />} />
       </Routes>
     </div>
   );

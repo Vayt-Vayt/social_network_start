@@ -8,11 +8,17 @@ const PostMap = ({srcAvatar, post, deletePost}) => {
     if (!post.body && !post.photos) {
       return; 
     }
+    
+    const dates = new Date(post.id).toLocaleString('ru', {
+      year: 'numeric', month: 'long', day:'numeric', hour:'numeric', minute:'numeric'
+    })
+
     return (
         <div className={styless.postContent}>
           <div className={styless.avatar}>
-            <div>
+            <div className={styless.date}>
               <img alt="avatar" src={srcAvatar} />
+              <span >{dates}</span>
             </div>
             <div className={styless.position}>
               <span className={stylessClose.close} onClick={() => deletePost(post.id)} />

@@ -24,16 +24,20 @@ export default MyModal;
 export const PhotoModal = ({ photo, state, setState }) => {
   const exit = () => setState(false);
   const stopPropaginations = (e) => e.stopPropagation();
-  const rootClasses = [styless.modal, styless.modalActive];
+
+  const rootClasses = state ? [styless.modal, styless.active] : [styless.modal];
+  const rootContant = state ? [styless.modalContent, styless.active] : [styless.modalContent];
   if (!state) {
     return;
   }
-  
+ 
   return (
     <div className={rootClasses.join(" ")} onClick={exit}>
       <div onClick={stopPropaginations}>
-        <div className={styless.position} ><span className={styless.close} onClick={exit} /></div>
-        <div className={styless.modalContent}>
+        <div className={styless.position} >
+          <span className={styless.close} onClick={exit} />
+        </div>
+        <div className={rootContant.join(" ")}>
           <div>
             <img alt='photos' src={photo} className={styless.modalImg} />  
           </div>

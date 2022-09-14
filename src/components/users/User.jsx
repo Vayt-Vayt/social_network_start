@@ -30,7 +30,7 @@ const User = ({ user, follow, unFollow, disabledFollow }) => {
       </div>
       <div className={styless.elemInfo} onClick={stopPropaginations}>
         <label>{user.name}</label>
-        {user.status && <label>{user.status}</label>}
+        {/* {user.status && <label>{user.status}</label>} */}
         {user.followed ? (
           <MyButton
             onClick={() => unFollow(user.id)}

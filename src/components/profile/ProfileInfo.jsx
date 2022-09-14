@@ -22,7 +22,7 @@ const ProfileInfo = ({ profile, isOwner, offEdit, onEdit, saveEdit, edit }) => {
         <ContainerStatus isOwner={isOwner} />
       </div>
       {edit ? (
-        <div className={styless.informations}>
+        <div /* className={styless.informations} */>
           <ProfileInfoEdit
             profile={profile}
             offEdit={offEdit}

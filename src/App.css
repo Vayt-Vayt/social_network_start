@@ -4,13 +4,30 @@
     box-sizing: border-box;
 }
 
+body {
+    width: 98%;
+    margin: 0 auto;
+}
+
 .App {
     margin: 0 auto;
-    width: 1200px;
-    height: auto;
+    max-width: 1200px;
     display: grid;
     grid-template-areas: 'h h'  'n c' 'n c';
     grid-template-rows: 70px 1fr;
     grid-template-columns: 2fr 10fr;
+    gap: 5px;
+}
+
+@media (max-width: 799px ) {
+    body{
+        width: 100%;
+        margin: 0 auto ;
+    }
+
+    .App {
+        display: block;
+        margin:0 5px 60px;
+    }
 }
 

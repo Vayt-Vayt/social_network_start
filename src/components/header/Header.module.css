@@ -1,11 +1,11 @@
 .content {
+    margin: 0px;
     grid-area: h;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: rgba(0, 0, 0, 0.95);
     border-radius: 0 0 20px 20px;
-    margin-bottom: 5px;
     padding-right: 15px;
     padding-left: 5px;
 }
@@ -22,4 +22,10 @@
 
 .icons img {
     width: 60px;
+}
+
+@media (max-width: 799px ) {
+    .content {
+        margin: 0 auto 5px ;
+    }
 }
